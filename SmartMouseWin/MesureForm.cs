@@ -14,7 +14,12 @@ namespace SmartMouseWin
     public partial class MesureForm : Form
     {
         MouseHook mouseHook = new MouseHook();
-        double myOpacity = 0.3;
+        DrawLineClass drawLine = new DrawLineClass();
+        double myOpacity = 0.1;
+
+
+        LinkedList<Point> myPoints = new LinkedList<Point>();
+
         public MesureForm()
         {
             InitializeComponent();
@@ -30,7 +35,7 @@ namespace SmartMouseWin
         private void MesureForm_Load(object sender, EventArgs e)
         {
             this.Opacity = myOpacity; // この値は調整
-            
+            //this.panel_background.BackColor= Color.FromArgb(0,Color.White); //0~255で透明度を調整できる。 
         }
 
         private void MesureForm_MouseDown(object sender, MouseEventArgs e)
@@ -40,6 +45,8 @@ namespace SmartMouseWin
             {
                 this.TransparencyKey = this.BackColor;
                 this.Opacity = 1.0;
+                myPoints.Clear();
+                myPoints.AddLast(new Point(e.X, e.Y));
                 mouseHook.Hook();
                 
             }
@@ -72,7 +79,6 @@ namespace SmartMouseWin
                 this.Opacity = myOpacity;
                 this.TransparencyKey = Color.Empty;
                 isMesure = !isMesure;
-
             }
             
 
@@ -85,10 +91,25 @@ namespace SmartMouseWin
             
             if (isMesure)
             {
-                
-                string s = String.Format("X:{0}Y:{1}", e.Point.X.ToString(), e.Point.Y.ToString());
+                if (this.myPoints.Count == 2)
+                {
+                    this.myPoints.RemoveLast();
+                }
+                this.myPoints.AddLast(e.Point);
+
+
+
+                string s = String.Format(
+                    "X:{0}Y:{1}///X:{2}Y:{3}",
+                    myPoints.ElementAt(0).X.ToString(), 
+                    myPoints.ElementAt(0).Y.ToString(),
+                    myPoints.ElementAt(1).X.ToString(),
+                    myPoints.ElementAt(1).Y.ToString()
+                    );
                 this.label_value1.Text = s;
                 this.panel_values.Location= new Point(e.Point.X+10,e.Point.Y+10);
+                
+                //this.Paint += Panel_background_Paint;
                 Debug.WriteLine(s);
             }
 
@@ -96,11 +117,17 @@ namespace SmartMouseWin
 
         }
 
+
         private void MouseHook_LButtonUpEvent(object sender, MouseEventArg e)
         {
             
         }
 
+        
+        private void Panel_background_Paint(object? sender, PaintEventArgs e)
+        {
+            drawLine.DrawLine(e, myPoints.ElementAt(0), myPoints.ElementAt(1));
 
+        }
     }
 }

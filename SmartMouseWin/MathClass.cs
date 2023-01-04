@@ -11,28 +11,22 @@ namespace SmartMouseWin
     {
         public double PixcelMeasere(Point point1, Point point2)
         {
-            double getPixcelLength =
-                Math.Sqrt(
+            return Math.Sqrt(
                     (Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2))
                     );
-
-            return getPixcelLength;
-
         }
 
 
         /// <summary>
-        /// pixcelの長さが何センチか。デフォルトでは1㎝
+        /// pixcelの長さが何センチか。デフォルトでは10㎝のピクセル距離基準として計算する。
+        /// magnificationを変更することで調整。
         /// </summary>
         /// <param name="pixcelLength"></param>
         /// <param name="magnification"></param>
         /// <returns></returns>
         public double PixcelLengthtoCMLength(double pixcelLength,double objectpixcelLength,int magnification=10)
         {
-            double onecmpixcel = pixcelLength / magnification;
-            double objectCM = objectpixcelLength / onecmpixcel;
-
-            return objectCM;
+            return objectpixcelLength / (pixcelLength / magnification);
         }
 
         public static double Angle(Point point1,Point point2)

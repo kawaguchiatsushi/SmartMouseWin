@@ -31,8 +31,15 @@
             this.label_value1 = new System.Windows.Forms.Label();
             this.panel_values = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button_close = new System.Windows.Forms.Button();
+            this.button_mode = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.button_return = new System.Windows.Forms.Button();
             this.panel_values.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // label_value1
@@ -40,9 +47,8 @@
             this.label_value1.AutoSize = true;
             this.label_value1.Location = new System.Drawing.Point(3, 13);
             this.label_value1.Name = "label_value1";
-            this.label_value1.Size = new System.Drawing.Size(101, 15);
+            this.label_value1.Size = new System.Drawing.Size(0, 15);
             this.label_value1.TabIndex = 0;
-            this.label_value1.Text = "ここに値が入ります。";
             // 
             // panel_values
             // 
@@ -50,7 +56,7 @@
             this.panel_values.Controls.Add(this.label_value1);
             this.panel_values.Location = new System.Drawing.Point(12, 12);
             this.panel_values.Name = "panel_values";
-            this.panel_values.Size = new System.Drawing.Size(168, 43);
+            this.panel_values.Size = new System.Drawing.Size(232, 43);
             this.panel_values.TabIndex = 1;
             // 
             // pictureBox1
@@ -61,23 +67,79 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(198, 19);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(138, 413);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            // 
+            // button_close
+            // 
+            this.button_close.Location = new System.Drawing.Point(24, 84);
+            this.button_close.Name = "button_close";
+            this.button_close.Size = new System.Drawing.Size(75, 23);
+            this.button_close.TabIndex = 4;
+            this.button_close.Text = "終了";
+            this.button_close.UseVisualStyleBackColor = true;
+            this.button_close.Click += new System.EventHandler(this.button_close_Click);
+            this.button_close.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseDown);
+            this.button_close.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseMove);
+            this.button_close.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseUp);
+            // 
+            // button_mode
+            // 
+            this.button_mode.Location = new System.Drawing.Point(24, 113);
+            this.button_mode.Name = "button_mode";
+            this.button_mode.Size = new System.Drawing.Size(75, 23);
+            this.button_mode.TabIndex = 5;
+            this.button_mode.Text = "pixmesure";
+            this.button_mode.UseVisualStyleBackColor = true;
+            this.button_mode.Click += new System.EventHandler(this.Button_mode_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(331, 19);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(138, 413);
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseDown);
+            this.pictureBox3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseMove);
+            this.pictureBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseUp);
+            // 
+            // button_return
+            // 
+            this.button_return.Location = new System.Drawing.Point(24, 142);
+            this.button_return.Name = "button_return";
+            this.button_return.Size = new System.Drawing.Size(75, 23);
+            this.button_return.TabIndex = 7;
+            this.button_return.Text = "戻す";
+            this.button_return.UseVisualStyleBackColor = true;
+            this.button_return.Click += new System.EventHandler(this.Button_return_Click);
+            // 
             // MesureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button_return);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.button_mode);
+            this.Controls.Add(this.button_close);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel_values);
             this.Name = "MesureForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MesureForm_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MesureForm_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MesureForm_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MesureForm_MouseUp);
             this.panel_values.ResumeLayout(false);
             this.panel_values.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -87,5 +149,10 @@
         private Label label_value1;
         private Panel panel_values;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private Button button_close;
+        private Button button_mode;
+        private PictureBox pictureBox3;
+        private Button button_return;
     }
 }

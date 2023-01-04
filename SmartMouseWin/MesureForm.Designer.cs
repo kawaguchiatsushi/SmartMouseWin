@@ -38,6 +38,7 @@
             this.button_return = new System.Windows.Forms.Button();
             this.Settings_panel = new System.Windows.Forms.Panel();
             this.Control_button = new System.Windows.Forms.Button();
+            this.Save_button = new System.Windows.Forms.Button();
             this.panel_values.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -127,12 +128,13 @@
             // 
             // Settings_panel
             // 
+            this.Settings_panel.Controls.Add(this.Save_button);
             this.Settings_panel.Controls.Add(this.button_mode);
             this.Settings_panel.Controls.Add(this.button_return);
             this.Settings_panel.Controls.Add(this.button_close);
             this.Settings_panel.Location = new System.Drawing.Point(12, 73);
             this.Settings_panel.Name = "Settings_panel";
-            this.Settings_panel.Size = new System.Drawing.Size(135, 166);
+            this.Settings_panel.Size = new System.Drawing.Size(135, 233);
             this.Settings_panel.TabIndex = 8;
             // 
             // Control_button
@@ -145,6 +147,17 @@
             this.Control_button.TabIndex = 9;
             this.Control_button.UseVisualStyleBackColor = true;
             this.Control_button.Click += new System.EventHandler(this.Control_button_Click);
+            // 
+            // Save_button
+            // 
+            this.Save_button.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Save_button.Location = new System.Drawing.Point(3, 159);
+            this.Save_button.Name = "Save_button";
+            this.Save_button.Size = new System.Drawing.Size(129, 43);
+            this.Save_button.TabIndex = 8;
+            this.Save_button.Text = "保存";
+            this.Save_button.UseVisualStyleBackColor = true;
+            this.Save_button.Click += new System.EventHandler(this.Save_button_Click);
             // 
             // MesureForm
             // 
@@ -183,5 +196,6 @@
         private Button button_return;
         private Panel Settings_panel;
         private Button Control_button;
+        private Button Save_button;
     }
 }

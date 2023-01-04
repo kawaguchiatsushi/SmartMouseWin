@@ -162,7 +162,7 @@ namespace SmartMouseWin
                             );
                         isPixcelLength = !isPixcelLength;
                         pixcelLengths.Clear();
-                        //isMesure = !isMesure;
+                        
                         DrawLineClass.DrawMesure(
                             ref backCamvas,
                             pictureBox2,
@@ -171,7 +171,7 @@ namespace SmartMouseWin
                             );
 
                     }
-                    Refresh();
+                    pictureBox3.Refresh();
                     return;
 
                 }
@@ -190,6 +190,8 @@ namespace SmartMouseWin
                         );
                     mesures.AddLast(mesureModel);
                     myPoints.Clear();
+                    DrawLineClass.ClearMesure(ref camvas,pictureBox3);
+                    panel_values.Visible = false;
                     
                     if (mesures.Count>0)
                     {
@@ -202,6 +204,7 @@ namespace SmartMouseWin
                             );
                         
                     }
+                    pictureBox3.Refresh();
                     return;
                 }
                 myPoints.AddLast(new Point(e.X, e.Y));
@@ -324,6 +327,14 @@ namespace SmartMouseWin
         private void Control_button_Click(object sender, EventArgs e)
         {
             Settings_panel.Visible = !Settings_panel.Visible;
+        }
+
+        private void Save_button_Click(object sender, EventArgs e)
+        {
+            if (mesures.Count > 0)
+            {
+                MesureModel.Value_Save();
+            }
         }
     }
 }

@@ -47,7 +47,10 @@ namespace SmartMouseWin
             SetCompornent.Set_Panel(this.panel_value, this.label_value, this.End);            
         }
 
+        public static void Value_Save()
+        {
 
+        }
     }
 
     

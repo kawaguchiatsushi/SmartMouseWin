@@ -123,9 +123,7 @@ namespace SmartMouseWin
             else
             {
                 this.mode = (Modes)this.mode + 1;
-                //Debug.WriteLine(((int)this.mode).ToString());
                 this.previousMode_Name = this.Mode_Property.ModeName;
-                
                 this.Mode_Property = modeproperties[(int)this.mode];
             }
             

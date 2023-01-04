@@ -9,11 +9,12 @@ namespace SmartMouseWin
 {
     internal class MathClass
     {
-        public static double PixcelMeasere(Point point1, Point point2)
+        public double PixcelMeasere(Point point1, Point point2)
         {
-            int xcm = -(point1.X - point2.X);
-            int ycm = -(point1.Y - point2.Y);
-            double getPixcelLength = Math.Sqrt(Math.Pow(xcm, 2) + Math.Pow(ycm, 2));
+            double getPixcelLength =
+                Math.Sqrt(
+                    (Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2))
+                    );
 
             return getPixcelLength;
 
@@ -26,7 +27,7 @@ namespace SmartMouseWin
         /// <param name="pixcelLength"></param>
         /// <param name="magnification"></param>
         /// <returns></returns>
-        public static double PixcelLengthtoCMLength(double pixcelLength,double objectpixcelLength,int magnification=10)
+        public double PixcelLengthtoCMLength(double pixcelLength,double objectpixcelLength,int magnification=10)
         {
             double onecmpixcel = pixcelLength / magnification;
             double objectCM = objectpixcelLength / onecmpixcel;

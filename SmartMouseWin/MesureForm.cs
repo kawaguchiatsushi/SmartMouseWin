@@ -19,8 +19,8 @@ namespace SmartMouseWin
         Bitmap camvas;
         Bitmap captureBitmap;
         Bitmap backCamvas;
-        int width =  Screen.PrimaryScreen.Bounds.Width;
-        int height = Screen.PrimaryScreen.Bounds.Height;
+        public static readonly int Swidth =  Screen.PrimaryScreen.Bounds.Width;
+        public static readonly int Sheight = Screen.PrimaryScreen.Bounds.Height;
 
         LinkedList<Point> myPoints = new LinkedList<Point>();
         List<Point> points= new List<Point>();
@@ -37,7 +37,7 @@ namespace SmartMouseWin
             InitializeComponent();
 
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Size = new Size(width,height);
+            this.Size = new Size(Swidth,Sheight);
 
 
             pictureBox1.Location = new Point(0, 0);
@@ -48,9 +48,9 @@ namespace SmartMouseWin
             pictureBox2.Margin= new Padding(0);
             pictureBox3.Margin = new Padding(0);
 
-            pictureBox1.ClientSize = new Size(width, height);
-            pictureBox2.ClientSize = new Size(width, height);
-            pictureBox3.ClientSize = new Size(width, height);
+            pictureBox1.ClientSize = new Size(Swidth, Sheight);
+            pictureBox2.ClientSize = new Size(Swidth, Sheight);
+            pictureBox3.ClientSize = new Size(Swidth, Sheight);
 
 
             pictureBox2.Parent = pictureBox1;
@@ -59,8 +59,8 @@ namespace SmartMouseWin
             pictureBox1.BackColor = Color.Transparent;
             pictureBox2.BackColor = Color.Transparent;
             pictureBox3.BackColor = Color.Transparent;
-            camvas = new Bitmap(width, height);
-            backCamvas= new Bitmap(width,height);
+            camvas = new Bitmap(Swidth, Sheight);
+            backCamvas= new Bitmap(Swidth, Sheight);
             pictureBox2.Image = backCamvas;
             pictureBox3.Image= camvas;
             Settings_panel.Parent = pictureBox3;
@@ -69,6 +69,8 @@ namespace SmartMouseWin
 
             panel_values.Parent = pictureBox3;
             panel_values.Visible = false;
+            label_value1.Size = new Size(0, 13);
+            panel_values.Size = new Size(0, 13);
 
         }
 
@@ -82,7 +84,7 @@ namespace SmartMouseWin
             this.Opacity = myOpacity;
             this.TransparencyKey = this.BackColor;
             this.panel_values.BackColor= Color.Transparent;
-            captureBitmap = new Bitmap(width, height);
+            captureBitmap = new Bitmap(Swidth, Sheight);
             Graphics g = Graphics.FromImage(captureBitmap);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), captureBitmap.Size);
             g.Dispose();
@@ -97,9 +99,12 @@ namespace SmartMouseWin
 
         
 
-        private void button_close_Click(object sender, EventArgs e)
+        private void Button_close_Click(object sender, EventArgs e)
         {
-            this.Visible= false;
+            //Close_Processing();
+            //isPixcelLength = true;
+            //this.Visible= false;
+            this.Close();
         }
 
         private void Button_close_MouseDown(object sender, MouseEventArgs e)
@@ -242,8 +247,8 @@ namespace SmartMouseWin
 
             var p1 = myPoints.ElementAt(0);
             var p2 = myPoints.ElementAt(1);
-
-            var pixlength = MathClass.PixcelMeasere(p1, p2);
+            MathClass mathClass = new();
+            var pixlength = mathClass.PixcelMeasere(p1, p2);
 
 
             DrawLineClass.DrawMesure(ref camvas, pictureBox3, p1, p2);
@@ -255,7 +260,7 @@ namespace SmartMouseWin
 
                  );
             this.label_value1.Text = s;
-            var changLocation = LocationClass.ChangeValuePanelLocation(e.Location, width, height, panel_values.Size);
+            var changLocation = LocationClass.ChangeValuePanelLocation(e.Location, Swidth, Sheight, panel_values.Size);
             this.panel_values.Location = new Point(myX + changLocation.Item1, myY + changLocation.Item2);
 
 
@@ -310,18 +315,23 @@ namespace SmartMouseWin
 
             if (mesures.Count==0 && MyPixcelLength!=null)
             {
-                MyPixcelLength = null;
-                DrawLineClass.ClearMesure(ref backCamvas,pictureBox2);
-                DrawLineClass.ClearMesure(ref camvas, pictureBox3);
-                panel_values.Visible = false;
-                if (myPoints.Count>0)
-                {
-                    myPoints.Clear();
-                }
-
+                Close_Processing();
                 isPixcelLength = !isPixcelLength;
-
             }
+        }
+
+        private void Close_Processing()
+        {
+            MyPixcelLength = null;
+            DrawLineClass.ClearMesure(ref backCamvas, pictureBox2);
+            DrawLineClass.ClearMesure(ref camvas, pictureBox3);
+            panel_values.Visible = false;
+            if (myPoints.Count > 0)
+            {
+                myPoints.Clear();
+            }
+
+            
         }
 
         private void Control_button_Click(object sender, EventArgs e)

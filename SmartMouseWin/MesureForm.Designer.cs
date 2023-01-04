@@ -37,8 +37,8 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button_return = new System.Windows.Forms.Button();
             this.Settings_panel = new System.Windows.Forms.Panel();
-            this.Control_button = new System.Windows.Forms.Button();
             this.Save_button = new System.Windows.Forms.Button();
+            this.Control_button = new System.Windows.Forms.Button();
             this.panel_values.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -48,19 +48,22 @@
             // 
             // label_value1
             // 
+            this.label_value1.Size = new System.Drawing.Size(0, 13);
             this.label_value1.AutoSize = true;
             this.label_value1.Location = new System.Drawing.Point(3, 13);
             this.label_value1.Name = "label_value1";
-            this.label_value1.Size = new System.Drawing.Size(0, 15);
             this.label_value1.TabIndex = 0;
+            this.label_value1.Font = new Font("Arial", 12f);
             // 
             // panel_values
             // 
+            this.panel_values.Size = new System.Drawing.Size(0, 13);
+            this.panel_values.AutoSize = true;
             this.panel_values.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_values.Controls.Add(this.label_value1);
             this.panel_values.Location = new System.Drawing.Point(12, 374);
+            this.panel_values.Margin = new System.Windows.Forms.Padding(0);
             this.panel_values.Name = "panel_values";
-            this.panel_values.Size = new System.Drawing.Size(180, 43);
             this.panel_values.TabIndex = 1;
             // 
             // pictureBox1
@@ -88,7 +91,7 @@
             this.button_close.TabIndex = 4;
             this.button_close.Text = "終了";
             this.button_close.UseVisualStyleBackColor = true;
-            this.button_close.Click += new System.EventHandler(this.button_close_Click);
+            this.button_close.Click += new System.EventHandler(this.Button_close_Click);
             this.button_close.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseDown);
             this.button_close.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseMove);
             this.button_close.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseUp);
@@ -137,17 +140,6 @@
             this.Settings_panel.Size = new System.Drawing.Size(135, 233);
             this.Settings_panel.TabIndex = 8;
             // 
-            // Control_button
-            // 
-            this.Control_button.BackgroundImage = global::SmartMouseWin.Properties.Resources.SettingsImage;
-            this.Control_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Control_button.Location = new System.Drawing.Point(12, 19);
-            this.Control_button.Name = "Control_button";
-            this.Control_button.Size = new System.Drawing.Size(55, 48);
-            this.Control_button.TabIndex = 9;
-            this.Control_button.UseVisualStyleBackColor = true;
-            this.Control_button.Click += new System.EventHandler(this.Control_button_Click);
-            // 
             // Save_button
             // 
             this.Save_button.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -158,6 +150,17 @@
             this.Save_button.Text = "保存";
             this.Save_button.UseVisualStyleBackColor = true;
             this.Save_button.Click += new System.EventHandler(this.Save_button_Click);
+            // 
+            // Control_button
+            // 
+            this.Control_button.BackgroundImage = global::SmartMouseWin.Properties.Resources.SettingsImage;
+            this.Control_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Control_button.Location = new System.Drawing.Point(12, 19);
+            this.Control_button.Name = "Control_button";
+            this.Control_button.Size = new System.Drawing.Size(55, 48);
+            this.Control_button.TabIndex = 9;
+            this.Control_button.UseVisualStyleBackColor = true;
+            this.Control_button.Click += new System.EventHandler(this.Control_button_Click);
             // 
             // MesureForm
             // 
@@ -181,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.Settings_panel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

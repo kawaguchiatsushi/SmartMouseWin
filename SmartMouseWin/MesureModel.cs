@@ -16,6 +16,7 @@ namespace SmartMouseWin
         public double PixcelLength;
         public double Centimeter;
         public string CentimeterStr;
+        public double ObjectPixcelLength;
         public Panel panel_value;
         public Label label_value;
         
@@ -23,17 +24,20 @@ namespace SmartMouseWin
         public MesureModel(
             Point start,
             Point end,
-            double objectPixcelLength,
+            double pixcelLength,
             int magnification = 10
 
             )
         {
             this.Start = start;
             this.End = end;
-            this.PixcelLength = MathClass.PixcelMeasere(start, end);
-            this.Centimeter = MathClass.PixcelLengthtoCMLength(
+            MathClass mathClass = new MathClass();
+            this.PixcelLength = pixcelLength;
+            this.ObjectPixcelLength = mathClass.PixcelMeasere(start, end);
+
+            this.Centimeter = mathClass.PixcelLengthtoCMLength(
                 this.PixcelLength,
-                objectPixcelLength,
+                this.ObjectPixcelLength,
                 magnification
                 );
             this.CentimeterStr =
@@ -70,7 +74,8 @@ namespace SmartMouseWin
         {
             this.Start = start;
             this.End = end;
-            this.PixcelLength = MathClass.PixcelMeasere(start, end);
+            MathClass mathClass = new MathClass();
+            this.PixcelLength = mathClass.PixcelMeasere(start, end);
             
             this.PixcelLengthStr =
                 String.Format(
@@ -93,12 +98,11 @@ namespace SmartMouseWin
     {
         public static void Set_Lavel(Label label, string str)
         {
-
             label.AutoSize = true;
-            label.Size = new System.Drawing.Size(0, 15);
             label.TabIndex = 0;
             label.Font = new Font("Arial",12f);
             label.Text = str;
+            label.Size = new System.Drawing.Size(0, 13);
         }
 
         public static void Set_Panel(Panel panel, Label label, Point end)
@@ -106,15 +110,17 @@ namespace SmartMouseWin
             // 
             // panel_value
             // 
+            panel.Size = new System.Drawing.Size(0, 13);
             panel.AutoSize = true;
             panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             panel.Controls.Add(label);
-            panel.Size = new System.Drawing.Size(100, 43);
+            
             panel.TabIndex = 1;
             var changLocation = LocationClass.ChangeValuePanelLocation(
                 end,
-                Screen.PrimaryScreen.Bounds.Size,
-                panel.Size
+                MesureForm.Swidth,
+                MesureForm.Sheight,
+                new Size(70,13)
                 );
             panel.Location = new Point(
                 end.X + changLocation.Item1, end.Y + changLocation.Item2);

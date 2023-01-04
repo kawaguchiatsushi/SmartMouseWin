@@ -10,19 +10,44 @@ namespace SmartMouseWin
     {
         public static (int,int) ChangeValuePanelLocation(Point point,int width,int height,Size panelsize)
         {
-            bool left = point.X < (width / 2);
-            bool up = point.Y < (height/2);
             int margin = 10;
-            
-            var myPosition = (margin,margin);
+            int myNum = 2;
+            bool right = point.X > (width - (panelsize.Width+margin));
+            bool left = point.X < (panelsize.Width + margin);
+            bool up = point.Y < (panelsize.Height+margin);
+            bool down = point.Y > (height - (panelsize.Height + margin));
 
-            if (!left)
+            bool isAboveCenter = point.Y < (height/myNum);
+            bool isLeftofCenter = point.X < (width/myNum);
+
+
+            var myPosition = (margin,margin);
+            if (isAboveCenter)
+            {
+                myPosition.Item2 = -panelsize.Height - margin;
+            }
+           
+            if (isLeftofCenter)
             {
                 myPosition.Item1 = -panelsize.Width - margin;
             }
-            if(!up)
+            
+
+            if (right)
             {
-                myPosition.Item2 = -panelsize.Height -margin;
+                myPosition.Item1 = -panelsize.Width - margin;
+            }
+            if (left)
+            {
+                myPosition.Item1 =  margin;
+            }
+            if (up)
+            {
+                myPosition.Item2 =  margin;
+            }
+            if (down)
+            {
+                myPosition.Item2 = -panelsize.Height - margin;
             }
 
             return myPosition;

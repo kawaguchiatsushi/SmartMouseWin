@@ -17,7 +17,7 @@ namespace SmartMouseWin
         public double Centimeter;
         public string CentimeterStr;
         public Panel panel_value;
-        private Label label_value;
+        public Label label_value;
         
 
         public MesureModel(
@@ -59,8 +59,8 @@ namespace SmartMouseWin
         public Point End;
         public double PixcelLength;
         public string PixcelLengthStr;
-        private Panel panel_value;
-        private Label label_value;
+        public Panel panel_value;
+        public Label label_value;
 
 
         public PixcelLengthModel(Point start,Point end)

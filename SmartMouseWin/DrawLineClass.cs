@@ -76,17 +76,17 @@ namespace SmartMouseWin
             SolidBrush blueBrush = new SolidBrush(Color.Blue);
             
 
-            var angle = MathClass.Angle(point1, point2);
-            //var rightAngledPoint1 = MathClass.RightAngledPoint1(angle,point1);
-            var rightAngledPoint2 = MathClass.RightAngledPoint1(angle, point2);
+            //var angle = MathClass.Angle(point1, point2);
+            ////var rightAngledPoint1 = MathClass.RightAngledPoint1(angle,point1);
+            //var rightAngledPoint2 = MathClass.RightAngledPoint1(angle, point2);
 
-            //graphics.DrawLine(linePen, point1.X, point1.Y,rightAngledPoint1.X,rightAngledPoint1.Y);
-            graphics.DrawLine(linePen, point2.X, point2.Y, rightAngledPoint2.X, rightAngledPoint2.Y);
-            int ang = 180;
-            //double newX = ((point2.X-point1.X)* Math.Cos(ang))-((point2.Y-point1.Y)*Math.Sin(ang))+point1.X;
-            //double newY = ((point2.X - point1.X) * Math.Sin(ang)) - ((point2.Y - point1.Y) * Math.Cos(ang)) + point1.Y;
+            ////graphics.DrawLine(linePen, point1.X, point1.Y,rightAngledPoint1.X,rightAngledPoint1.Y);
+            //graphics.DrawLine(linePen, point2.X, point2.Y, rightAngledPoint2.X, rightAngledPoint2.Y);
+            //int ang = 180;
+            ////double newX = ((point2.X-point1.X)* Math.Cos(ang))-((point2.Y-point1.Y)*Math.Sin(ang))+point1.X;
+            ////double newY = ((point2.X - point1.X) * Math.Sin(ang)) - ((point2.Y - point1.Y) * Math.Cos(ang)) + point1.Y;
 
-            //graphics.DrawLine(linePen,point1.X,point1.Y,(int)newX, (int)newY);
+            ////graphics.DrawLine(linePen,point1.X,point1.Y,(int)newX, (int)newY);
             graphics.DrawLine(linePen, point1.X, point1.Y, point2.X, point2.Y);
             
 
@@ -172,6 +172,7 @@ namespace SmartMouseWin
                     graphics.DrawLine(linePen, mesure.Start.X, mesure.Start.Y, mesure.End.X, mesure.End.Y);
 
                     mesure.panel_value.Parent = parentBox;
+                    //mesure.label_value.Visible= true;
                 }
             }
 
@@ -182,7 +183,16 @@ namespace SmartMouseWin
 
         }
 
+        public static void ClearMesure(ref Bitmap camvas, PictureBox pictureBox)
+        {
 
+            Graphics graphics = Graphics.FromImage(camvas);
+            graphics.Clear(Color.Transparent);
+            graphics.Dispose();
+            pictureBox.Image = camvas;
+
+
+        }
 
 
     }

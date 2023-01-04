@@ -36,10 +36,13 @@
             this.button_mode = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button_return = new System.Windows.Forms.Button();
+            this.Settings_panel = new System.Windows.Forms.Panel();
+            this.Control_button = new System.Windows.Forms.Button();
             this.panel_values.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.Settings_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_value1
@@ -54,9 +57,9 @@
             // 
             this.panel_values.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_values.Controls.Add(this.label_value1);
-            this.panel_values.Location = new System.Drawing.Point(12, 12);
+            this.panel_values.Location = new System.Drawing.Point(12, 374);
             this.panel_values.Name = "panel_values";
-            this.panel_values.Size = new System.Drawing.Size(232, 43);
+            this.panel_values.Size = new System.Drawing.Size(180, 43);
             this.panel_values.TabIndex = 1;
             // 
             // pictureBox1
@@ -77,9 +80,10 @@
             // 
             // button_close
             // 
-            this.button_close.Location = new System.Drawing.Point(24, 84);
+            this.button_close.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button_close.Location = new System.Drawing.Point(3, 12);
             this.button_close.Name = "button_close";
-            this.button_close.Size = new System.Drawing.Size(75, 23);
+            this.button_close.Size = new System.Drawing.Size(129, 43);
             this.button_close.TabIndex = 4;
             this.button_close.Text = "終了";
             this.button_close.UseVisualStyleBackColor = true;
@@ -90,9 +94,10 @@
             // 
             // button_mode
             // 
-            this.button_mode.Location = new System.Drawing.Point(24, 113);
+            this.button_mode.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button_mode.Location = new System.Drawing.Point(3, 61);
             this.button_mode.Name = "button_mode";
-            this.button_mode.Size = new System.Drawing.Size(75, 23);
+            this.button_mode.Size = new System.Drawing.Size(129, 43);
             this.button_mode.TabIndex = 5;
             this.button_mode.Text = "pixmesure";
             this.button_mode.UseVisualStyleBackColor = true;
@@ -111,13 +116,35 @@
             // 
             // button_return
             // 
-            this.button_return.Location = new System.Drawing.Point(24, 142);
+            this.button_return.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button_return.Location = new System.Drawing.Point(3, 110);
             this.button_return.Name = "button_return";
-            this.button_return.Size = new System.Drawing.Size(75, 23);
+            this.button_return.Size = new System.Drawing.Size(129, 43);
             this.button_return.TabIndex = 7;
             this.button_return.Text = "戻す";
             this.button_return.UseVisualStyleBackColor = true;
             this.button_return.Click += new System.EventHandler(this.Button_return_Click);
+            // 
+            // Settings_panel
+            // 
+            this.Settings_panel.Controls.Add(this.button_mode);
+            this.Settings_panel.Controls.Add(this.button_return);
+            this.Settings_panel.Controls.Add(this.button_close);
+            this.Settings_panel.Location = new System.Drawing.Point(12, 73);
+            this.Settings_panel.Name = "Settings_panel";
+            this.Settings_panel.Size = new System.Drawing.Size(135, 166);
+            this.Settings_panel.TabIndex = 8;
+            // 
+            // Control_button
+            // 
+            this.Control_button.BackgroundImage = global::SmartMouseWin.Properties.Resources.SettingsImage;
+            this.Control_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Control_button.Location = new System.Drawing.Point(12, 19);
+            this.Control_button.Name = "Control_button";
+            this.Control_button.Size = new System.Drawing.Size(55, 48);
+            this.Control_button.TabIndex = 9;
+            this.Control_button.UseVisualStyleBackColor = true;
+            this.Control_button.Click += new System.EventHandler(this.Control_button_Click);
             // 
             // MesureForm
             // 
@@ -125,10 +152,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button_return);
+            this.Controls.Add(this.Control_button);
+            this.Controls.Add(this.Settings_panel);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.button_mode);
-            this.Controls.Add(this.button_close);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel_values);
@@ -140,6 +166,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.Settings_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -154,5 +181,7 @@
         private Button button_mode;
         private PictureBox pictureBox3;
         private Button button_return;
+        private Panel Settings_panel;
+        private Button Control_button;
     }
 }

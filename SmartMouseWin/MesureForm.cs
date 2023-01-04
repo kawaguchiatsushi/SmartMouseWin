@@ -63,8 +63,13 @@ namespace SmartMouseWin
             backCamvas= new Bitmap(width,height);
             pictureBox2.Image = backCamvas;
             pictureBox3.Image= camvas;
+            Settings_panel.Parent = pictureBox3;
+            Settings_panel.Visible = false;
+            Control_button.Parent = pictureBox3;
+
             panel_values.Parent = pictureBox3;
-            button_close.Parent = pictureBox3;
+            panel_values.Visible = false;
+
         }
 
         
@@ -138,10 +143,14 @@ namespace SmartMouseWin
 
         private void PictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
-            //isMesure = !isMesure;
+            if (Settings_panel.Visible)
+            {
+                Settings_panel.Visible = false;
+            }
             this.panel_values.BackColor = Color.FromArgb(224, 224, 224);
             if (isMesure)
             {
+                
                 if (isPixcelLength)
                 {
                     pixcelLengths.AddLast(new Point(e.X, e.Y));
@@ -162,10 +171,12 @@ namespace SmartMouseWin
                             );
 
                     }
+                    Refresh();
                     return;
 
                 }
-                if (myPoints.Count > 1)
+                
+                if (myPoints.Count ==2)
                 {
                     if (MyPixcelLength == null)
                     {
@@ -179,7 +190,7 @@ namespace SmartMouseWin
                         );
                     mesures.AddLast(mesureModel);
                     myPoints.Clear();
-                    //isMesure = !isMesure;
+                    
                     if (mesures.Count>0)
                     {
                         DrawLineClass.DrawMesure(
@@ -194,10 +205,8 @@ namespace SmartMouseWin
                     return;
                 }
                 myPoints.AddLast(new Point(e.X, e.Y));
+
             }
-   
-
-
         }
 
         private void PictureBox3_MouseMove(object sender, MouseEventArgs e)
@@ -216,6 +225,7 @@ namespace SmartMouseWin
             {
                 return;
             }
+            panel_values.Visible = true;
             int myX = e.Location.X;
             int myY = e.Location.Y;
 
@@ -255,14 +265,35 @@ namespace SmartMouseWin
 
         private void Button_return_Click(object sender, EventArgs e)
         {
-            if (mesures.Count>1)
+            if (panel_values.Visible)
             {
+                panel_values.Visible = false;
+                DrawLineClass.ClearMesure(ref camvas, pictureBox3);
+                return;
+            }
+            
+            if (mesures.Count>0)
+            {
+                mesures.Last().panel_value.Dispose();
                 mesures.RemoveLast();
                 if (MyPixcelLength==null)
                 {
                     return;
                 }
-                DrawLineClass.DrawMesure(
+                DrawLineClass.ClearMesure(ref backCamvas, pictureBox2);
+                if (mesures.Count==0)
+                {
+                    DrawLineClass.DrawMesure(
+                             ref backCamvas,
+                             pictureBox2,
+                             MyPixcelLength.Start,
+                             MyPixcelLength.End
+                             );
+                    return;
+                }
+                else
+                {
+                    DrawLineClass.DrawMesure(
                             ref backCamvas,
                             pictureBox2,
                             pictureBox3,
@@ -270,15 +301,29 @@ namespace SmartMouseWin
                             MyPixcelLength
                             );
 
+                }
+
             }
+
             if (mesures.Count==0 && MyPixcelLength!=null)
             {
                 MyPixcelLength = null;
-                backCamvas.Dispose();
-                backCamvas = new Bitmap(width, height);
-                pictureBox2.Image = backCamvas;
+                DrawLineClass.ClearMesure(ref backCamvas,pictureBox2);
+                DrawLineClass.ClearMesure(ref camvas, pictureBox3);
+                panel_values.Visible = false;
+                if (myPoints.Count>0)
+                {
+                    myPoints.Clear();
+                }
+
+                isPixcelLength = !isPixcelLength;
 
             }
+        }
+
+        private void Control_button_Click(object sender, EventArgs e)
+        {
+            Settings_panel.Visible = !Settings_panel.Visible;
         }
     }
 }

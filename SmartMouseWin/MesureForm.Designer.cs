@@ -48,29 +48,29 @@
             // 
             // label_value1
             // 
-            this.label_value1.Size = new System.Drawing.Size(0, 13);
             this.label_value1.AutoSize = true;
+            this.label_value1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label_value1.Location = new System.Drawing.Point(3, 13);
             this.label_value1.Name = "label_value1";
+            this.label_value1.Size = new System.Drawing.Size(0, 18);
             this.label_value1.TabIndex = 0;
-            this.label_value1.Font = new Font("Arial", 12f);
             // 
             // panel_values
             // 
-            this.panel_values.Size = new System.Drawing.Size(0, 13);
             this.panel_values.AutoSize = true;
             this.panel_values.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_values.Controls.Add(this.label_value1);
             this.panel_values.Location = new System.Drawing.Point(12, 374);
             this.panel_values.Margin = new System.Windows.Forms.Padding(0);
             this.panel_values.Name = "panel_values";
+            this.panel_values.Size = new System.Drawing.Size(6, 31);
             this.panel_values.TabIndex = 1;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(361, 25);
+            this.pictureBox1.Location = new System.Drawing.Point(486, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(405, 413);
+            this.pictureBox1.Size = new System.Drawing.Size(141, 158);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
@@ -78,7 +78,7 @@
             // 
             this.pictureBox2.Location = new System.Drawing.Point(198, 19);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(138, 413);
+            this.pictureBox2.Size = new System.Drawing.Size(138, 158);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
@@ -109,9 +109,9 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(331, 19);
+            this.pictureBox3.Location = new System.Drawing.Point(342, 19);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(138, 413);
+            this.pictureBox3.Size = new System.Drawing.Size(138, 158);
             this.pictureBox3.TabIndex = 6;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseDown);

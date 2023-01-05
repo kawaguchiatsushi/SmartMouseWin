@@ -14,6 +14,9 @@ namespace SmartMouseWin
 {
     public partial class MesureForm : Form
     {
+        private Point zeroPoint = new(0,0);
+        private Padding zeroPadding = new(0);
+        
         DrawLineClass drawLine = new DrawLineClass();
         double myOpacity = 0.01;
         Bitmap camvas;
@@ -21,6 +24,7 @@ namespace SmartMouseWin
         Bitmap backCamvas;
         public static readonly int Swidth =  Screen.PrimaryScreen.Bounds.Width;
         public static readonly int Sheight = Screen.PrimaryScreen.Bounds.Height;
+        public static readonly Size S_Size = Screen.PrimaryScreen.Bounds.Size;
 
         LinkedList<Point> myPoints = new LinkedList<Point>();
         List<Point> points= new List<Point>();
@@ -31,44 +35,34 @@ namespace SmartMouseWin
         //bool isMesure = false;
         PixcelLengthModel? MyPixcelLength;
         LinkedList<MesureModel> mesures= new LinkedList<MesureModel>();
+        Form magform;
+        Magnifier magnifier;
 
         public MesureForm()
         {
             InitializeComponent();
 
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Size = new Size(Swidth,Sheight);
+            this.Size = S_Size;
 
+            pictureBox1.Location = pictureBox2.Location = pictureBox3.Location = zeroPoint;
 
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox2.Location = new Point(0, 0);
-            pictureBox3.Location = new Point(0, 0);
+            pictureBox1.Margin= pictureBox2.Margin = pictureBox3.Margin= zeroPadding;
 
-            pictureBox1.Margin= new Padding(0);
-            pictureBox2.Margin= new Padding(0);
-            pictureBox3.Margin = new Padding(0);
+            pictureBox1.ClientSize = pictureBox2.ClientSize = pictureBox3.ClientSize = S_Size;
 
-            pictureBox1.ClientSize = new Size(Swidth, Sheight);
-            pictureBox2.ClientSize = new Size(Swidth, Sheight);
-            pictureBox3.ClientSize = new Size(Swidth, Sheight);
-
-
-            pictureBox2.Parent = pictureBox1;
-            pictureBox3.Parent = pictureBox2;
-
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox3.BackColor = Color.Transparent;
+            pictureBox1.BackColor = pictureBox2.BackColor = pictureBox3.BackColor = Color.Transparent;
+            
             camvas = new Bitmap(Swidth, Sheight);
             backCamvas= new Bitmap(Swidth, Sheight);
             pictureBox2.Image = backCamvas;
             pictureBox3.Image= camvas;
-            Settings_panel.Parent = pictureBox3;
-            Settings_panel.Visible = false;
-            Control_button.Parent = pictureBox3;
+            pictureBox2.Parent = pictureBox1;
+            pictureBox3.Parent = pictureBox2;
 
-            panel_values.Parent = pictureBox3;
-            panel_values.Visible = false;
+            Settings_panel.Parent = panel_values.Parent = Control_button.Parent = pictureBox3;
+            Settings_panel.Visible = panel_values.Visible = false;
+ 
             label_value1.Size = new Size(0, 13);
             panel_values.Size = new Size(0, 13);
 
@@ -93,18 +87,27 @@ namespace SmartMouseWin
             this.TransparencyKey = Color.Empty;
             //panel_values.BackColor = Color.FromArgb(100,Color.Gray);
             button_close.Visible = true;
+            magform = new Form();
+            magform.FormBorderStyle= FormBorderStyle.None;
+            magform.Size = new Size(100,100);
+
+            magform.Location = new Point(
+                this.Control_button.Location.X+this.Control_button.Width+20,
+                this.Control_button.Location.Y);
             
-            
+            magnifier = new Magnifier(magform);
+            magform.TopMost = true;
+            magform.Visible = false;
+
         }
 
         
 
         private void Button_close_Click(object sender, EventArgs e)
         {
-            //Close_Processing();
-            //isPixcelLength = true;
-            //this.Visible= false;
+
             this.Close();
+            this.magform.Close();
         }
 
         private void Button_close_MouseDown(object sender, MouseEventArgs e)
@@ -148,6 +151,8 @@ namespace SmartMouseWin
 
         private void PictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
+            magform.Visible= true;
+
             if (Settings_panel.Visible)
             {
                 Settings_panel.Visible = false;

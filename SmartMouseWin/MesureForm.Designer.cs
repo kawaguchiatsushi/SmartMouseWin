@@ -135,7 +135,7 @@
             this.Settings_panel.Controls.Add(this.button_mode);
             this.Settings_panel.Controls.Add(this.button_return);
             this.Settings_panel.Controls.Add(this.button_close);
-            this.Settings_panel.Location = new System.Drawing.Point(12, 73);
+            this.Settings_panel.Location = new System.Drawing.Point(12, 122);
             this.Settings_panel.Name = "Settings_panel";
             this.Settings_panel.Size = new System.Drawing.Size(135, 233);
             this.Settings_panel.TabIndex = 8;
@@ -155,9 +155,9 @@
             // 
             this.Control_button.BackgroundImage = global::SmartMouseWin.Properties.Resources.SettingsImage;
             this.Control_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Control_button.Location = new System.Drawing.Point(12, 19);
+            this.Control_button.Location = new System.Drawing.Point(20, 20);
             this.Control_button.Name = "Control_button";
-            this.Control_button.Size = new System.Drawing.Size(55, 48);
+            this.Control_button.Size = new System.Drawing.Size(55, 55);
             this.Control_button.TabIndex = 9;
             this.Control_button.UseVisualStyleBackColor = true;
             this.Control_button.Click += new System.EventHandler(this.Control_button_Click);

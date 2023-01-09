@@ -4,11 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing.Drawing2D;
+using System.Diagnostics;
 
 namespace SmartMouseWin
 {
     public class DrawLineClass
     {
+        private static Color lineColer = Color.SpringGreen;
+        private static int lineBorder = 3;
+        private static Pen linePen = new Pen(lineColer, lineBorder);
+        private static Font cfont = new Font("Arial", 11);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventArgs"></param>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
         public void DrawLine(PaintEventArgs eventArgs,Point point1,Point point2)
         {
             try
@@ -22,7 +34,7 @@ namespace SmartMouseWin
             }
             catch(Exception ex)
             {
-
+                Debug.WriteLine(ex.ToString());
             }
 
 
@@ -40,17 +52,11 @@ namespace SmartMouseWin
             Point point1, Point point2, string length)
         {
             try
-            {
-                Color lineColer = Color.SpringGreen;
-                int lineBorder = 3;
+            {                
                 var g = Graphics.FromImage(canvas);
-                var linePen = new Pen(lineColer, lineBorder);
-
+                
                 g.DrawImage(backupImage, 0, 0);
 
-                linePen.DashStyle = DashStyle.Solid;
-
-                Font cfont = new Font("Arial", 11);
                 g.DrawString(length + "cm", cfont, Brushes.SpringGreen, point2.X + 10, point2.Y + 10);
                 g.DrawLine(linePen, point1.X, point1.Y, point2.X, point2.Y);
 
@@ -63,7 +69,70 @@ namespace SmartMouseWin
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="camvas"></param>
+        /// <param name="pictureBox"></param>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        public static void DrawMesure(ref Bitmap camvas, PictureBox pictureBox,Point point1, Point point2)
+        {
+            Graphics graphics = Graphics.FromImage(camvas);
+            graphics.Clear(Color.Transparent);
+            graphics.DrawLine(linePen, point1.X, point1.Y, point2.X, point2.Y);
+            graphics.Dispose();
+            pictureBox.Image = camvas;
+        }
 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="camvas"></param>
+        /// <param name="pictureBox"></param>
+        /// <param name="parentBox"></param>
+        /// <param name="mesures"></param>
+        /// <param name="pixcelLengthModel"></param>
+        public static void DrawMesure(ref Bitmap camvas, PictureBox pictureBox,PictureBox parentBox, LinkedList<MesureModel> mesures,PixcelLengthModel pixcelLengthModel)
+        {
+
+            Graphics graphics = Graphics.FromImage(camvas);
+            graphics.Clear(Color.Transparent);
+            
+            if (pixcelLengthModel!= null)
+            {
+                graphics.DrawLine(linePen,pixcelLengthModel.Start,pixcelLengthModel.End);
+            }
+            if (mesures != null)
+            {
+                foreach (var mesure in mesures)
+                {
+                    graphics.DrawLine(linePen, mesure.Start.X, mesure.Start.Y, mesure.End.X, mesure.End.Y);
+                    mesure.panel_value.Parent = parentBox;
+                }
+            }
+            graphics.Dispose();
+            pictureBox.Image = camvas;
+        }
+
+        /// <summary>
+        /// bitmapClear
+        /// </summary>
+        /// <param name="camvas"></param>
+        /// <param name="pictureBox"></param>
+        public static void ClearMesure(ref Bitmap camvas, PictureBox pictureBox)
+        {
+
+            Graphics graphics = Graphics.FromImage(camvas);
+            graphics.Clear(Color.Transparent);
+            graphics.Dispose();
+            pictureBox.Image = camvas;
+
+
+        }
+
+        
 
 
     }

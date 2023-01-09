@@ -37,23 +37,25 @@ namespace SmartMouseWin
     /// </summary>
     public class Model
     {
+        /// <summary>
+        /// icon FilePath
+        /// </summary>
+        /// <param name="iconname"></param>
+        /// <returns></returns>
         private static String SetIconName(String iconname)
         {
+            string dir = String.Format(
+                @"{0}\icons",
+                Directory.GetCurrentDirectory()
+                );
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
             return String.Format(
-                @"{0}\icons\{1}.ico",
-                Directory.GetCurrentDirectory(),
+                @"{0}\{1}.ico",
+                dir,
                 iconname
                 );
         }
-        private static void CreateDir(String folder)
-        {
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-
-        }
-
         
 
         public static readonly string mesuringMode_Name = "測定モード";
@@ -76,8 +78,8 @@ namespace SmartMouseWin
 
         public List<Modeproperty> modeproperties = new();
 
-        Modeproperty MP_meuring = new Modeproperty(mesuringMode_Name,mesuringMode_Icon);
-        Modeproperty MP_nomal = new Modeproperty(nomalMode_Name,nomalMode_Icon);
+        Modeproperty MP_meuring = new(mesuringMode_Name, mesuringMode_Icon);
+        Modeproperty MP_nomal = new(nomalMode_Name,nomalMode_Icon);
         
 
 
@@ -123,9 +125,7 @@ namespace SmartMouseWin
             else
             {
                 this.mode = (Modes)this.mode + 1;
-                //Debug.WriteLine(((int)this.mode).ToString());
                 this.previousMode_Name = this.Mode_Property.ModeName;
-                
                 this.Mode_Property = modeproperties[(int)this.mode];
             }
             
@@ -137,6 +137,7 @@ namespace SmartMouseWin
             {
                 this.notifyIcon.Text = this.Mode_Property.ModeName;
                 this.notifyIcon.Icon.Dispose();
+                this.notifyIcon.Icon = null;
                 this.notifyIcon.Icon = new Icon(this.Mode_Property.IconName);
 
                 this.notifyIcon.BalloonTipTitle = balloonTipTitle;

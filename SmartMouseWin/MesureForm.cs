@@ -37,6 +37,7 @@ namespace SmartMouseWin
         LinkedList<MesureModel> mesures= new LinkedList<MesureModel>();
         Form magform;
         Magnifier magnifier;
+        //MagForm magform;
 
         public MesureForm()
         {
@@ -87,14 +88,15 @@ namespace SmartMouseWin
             this.TransparencyKey = Color.Empty;
             //panel_values.BackColor = Color.FromArgb(100,Color.Gray);
             button_close.Visible = true;
-            //this.magform = new Form();
+            
+            //magform = new MagForm();
             Magform();
-
+            //this.magnifier = new Magnifier(magform);
         }
 
         private void Magform()
         {
-            Size magformSize = new Size(100,100);
+            Size magformSize = new Size(100, 100);
             this.magform = new Form();
 
             this.magnifier = new Magnifier(this.magform);
@@ -110,6 +112,7 @@ namespace SmartMouseWin
             PictureBox magPicBox = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)(magPicBox)).BeginInit();
             magPicBox.Parent = this.magform;
+
             magPicBox.BackColor = Color.Transparent;
             magPicBox.Location = zeroPoint;
             magPicBox.Size = magformSize;
@@ -130,7 +133,7 @@ namespace SmartMouseWin
             this.magform.TopMost = true;
             this.magform.Visible = true;
         }
-        
+
 
         private void Button_close_Click(object sender, EventArgs e)
         {
@@ -375,10 +378,12 @@ namespace SmartMouseWin
 
         private void Save_button_Click(object sender, EventArgs e)
         {
-            if (mesures.Count > 0)
-            {
-                MesureModel.Value_Save();
-            }
+            //if (mesures.Count > 0)
+            //{
+            //    MesureModel.Value_Save();
+            //}
+            
+
         }
     }
 }

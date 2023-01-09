@@ -112,7 +112,8 @@ namespace SmartMouseWin
             // 
             panel.Size = new System.Drawing.Size(0, 13);
             panel.AutoSize = true;
-            panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            //panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            panel.BackColor = System.Drawing.Color.White;
             panel.Controls.Add(label);
             
             panel.TabIndex = 1;

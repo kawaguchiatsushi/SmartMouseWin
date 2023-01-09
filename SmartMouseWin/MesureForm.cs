@@ -186,7 +186,7 @@ namespace SmartMouseWin
             {
                 Settings_panel.Visible = false;
             }
-            this.panel_values.BackColor = Color.FromArgb(224, 224, 224);
+            this.panel_values.BackColor = Color.White;
             if (isMesure)
             {
                 
@@ -234,7 +234,7 @@ namespace SmartMouseWin
                     
                     if (mesures.Count>0)
                     {
-                        DrawLineClass.DrawMesure(
+                        DrawLineClass.DrawMesure_D(
                             ref backCamvas,
                             pictureBox2,
                             pictureBox3,

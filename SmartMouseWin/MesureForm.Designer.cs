@@ -48,14 +48,14 @@
             // 
             this.panel_values.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_values.Controls.Add(this.label_value1);
-            this.panel_values.Location = new System.Drawing.Point(12, 12);
+            this.panel_values.Location = new System.Drawing.Point(55, 43);
             this.panel_values.Name = "panel_values";
             this.panel_values.Size = new System.Drawing.Size(168, 43);
             this.panel_values.TabIndex = 1;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(361, 25);
+            this.pictureBox1.Location = new System.Drawing.Point(330, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(405, 413);
             this.pictureBox1.TabIndex = 2;

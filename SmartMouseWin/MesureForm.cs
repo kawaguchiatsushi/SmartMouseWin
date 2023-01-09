@@ -87,20 +87,49 @@ namespace SmartMouseWin
             this.TransparencyKey = Color.Empty;
             //panel_values.BackColor = Color.FromArgb(100,Color.Gray);
             button_close.Visible = true;
-            magform = new Form();
-            magform.FormBorderStyle= FormBorderStyle.None;
-            magform.Size = new Size(100,100);
-
-            magform.Location = new Point(
-                this.Control_button.Location.X+this.Control_button.Width+20,
-                this.Control_button.Location.Y);
-            
-            magnifier = new Magnifier(magform);
-            magform.TopMost = true;
-            magform.Visible = false;
+            //this.magform = new Form();
+            Magform();
 
         }
 
+        private void Magform()
+        {
+            Size magformSize = new Size(100,100);
+            this.magform = new Form();
+
+            this.magnifier = new Magnifier(this.magform);
+
+            this.magform.FormBorderStyle = FormBorderStyle.None;
+            this.magform.Size = magformSize;
+
+            this.magform.Location = new Point(
+                this.Control_button.Location.X + this.Control_button.Width + 20,
+                this.Control_button.Location.Y);
+
+            ///
+            PictureBox magPicBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(magPicBox)).BeginInit();
+            magPicBox.Parent = this.magform;
+            magPicBox.BackColor = Color.Transparent;
+            magPicBox.Location = zeroPoint;
+            magPicBox.Size = magformSize;
+            magPicBox.Margin = zeroPadding;
+            Bitmap magBitmap = new Bitmap(magformSize.Width, magformSize.Height);
+            Color lineColer = Color.SpringGreen;
+            int lineBorder = 1;
+            Pen linePen = new Pen(lineColer, lineBorder);
+            Graphics g = Graphics.FromImage(magBitmap);
+            g.Clear(Color.Transparent);
+            g.DrawLine(linePen, magformSize.Width / 2, 0, magformSize.Width / 2, magformSize.Height);
+            g.DrawLine(linePen, 0, magformSize.Height / 2, magformSize.Width, magformSize.Height / 2);
+            g.Dispose();
+            magPicBox.Image = magBitmap;
+
+            ///
+
+            this.magform.TopMost = true;
+            this.magform.Visible = true;
+        }
         
 
         private void Button_close_Click(object sender, EventArgs e)

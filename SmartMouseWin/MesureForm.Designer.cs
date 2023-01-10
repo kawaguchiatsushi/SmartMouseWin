@@ -58,7 +58,7 @@
             // panel_values
             // 
             this.panel_values.AutoSize = true;
-            this.panel_values.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel_values.BackColor = System.Drawing.Color.White;
             this.panel_values.Controls.Add(this.label_value1);
             this.panel_values.Location = new System.Drawing.Point(55, 43);
             this.panel_values.Name = "panel_values";

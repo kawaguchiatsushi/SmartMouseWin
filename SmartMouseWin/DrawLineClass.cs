@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Drawing.Drawing2D;
-using System.Diagnostics;
 
 namespace SmartMouseWin
 {
@@ -42,7 +37,7 @@ namespace SmartMouseWin
         }
 
         /// <summary>
-        /// 画像に線を引く。画像に長さを表示する。
+        /// 
         /// </summary>
         /// <param name="canvas"></param>
         /// <param name="backupImage"></param>
@@ -119,6 +114,14 @@ namespace SmartMouseWin
         }
 
 
+        /// <summary>
+        /// Main use
+        /// </summary>
+        /// <param name="camvas"></param>
+        /// <param name="pictureBox"></param>
+        /// <param name="parentBox"></param>
+        /// <param name="mesures"></param>
+        /// <param name="pixcelLengthModel"></param>
         public static void DrawMesure_D(ref Bitmap camvas, PictureBox pictureBox, PictureBox parentBox, LinkedList<MesureModel> mesures, PixcelLengthModel pixcelLengthModel)
         {
             

@@ -1,39 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using System.Diagnostics;
 
 namespace SmartMouseWin
 {
     public partial class MesureForm : Form
     {
+        /// <summary>
+        /// Screen Size
+        /// </summary>
+        public static readonly int Swidth = Screen.PrimaryScreen.Bounds.Width;
+        public static readonly int Sheight = Screen.PrimaryScreen.Bounds.Height;
+        public static readonly Size S_Size = Screen.PrimaryScreen.Bounds.Size;
+
+        /// <summary>
+        /// private settings
+        /// </summary>
         private Point zeroPoint = new(0,0);
         private Padding zeroPadding = new(0);
         private readonly string pixModeName = "ピクセル距離";
         private readonly string cmModeName = "㎝モード";
 
-        DrawLineClass drawLine = new();
-        double myOpacity = 0.01;
-        Bitmap camvas, captureBitmap, backCamvas;
-        
-        public static readonly int Swidth =  Screen.PrimaryScreen.Bounds.Width;
-        public static readonly int Sheight = Screen.PrimaryScreen.Bounds.Height;
-        public static readonly Size S_Size = Screen.PrimaryScreen.Bounds.Size;
-
-        LinkedList<Point> myPoints = new();
-        LinkedList<Point> pixcelLengths = new ();
-
         bool isPixcelLength = true;
         bool isButtonCloseMove = false;
         bool isMesure = true;
+
+        Bitmap camvas, captureBitmap, backCamvas;       
+
+        LinkedList<Point> myPoints = new();
+        LinkedList<Point> pixcelLengths = new ();
+        
         PixcelLengthModel? MyPixcelLength;
         LinkedList<MesureModel> mesures= new LinkedList<MesureModel>();
 
@@ -42,6 +36,11 @@ namespace SmartMouseWin
         /// </summary>
         Form magform;
         Magnifier magnifier;
+
+        /// <summary>
+        /// Class for drawing lines
+        /// </summary>
+        DrawLineClass drawLine = new();
 
         public MesureForm()
         {
@@ -76,7 +75,6 @@ namespace SmartMouseWin
 
         private void MesureForm_Load(object sender, EventArgs e)
         {
-            this.Opacity = myOpacity;
             this.TransparencyKey = this.BackColor;
             this.panel_values.BackColor= Color.Transparent;
             captureBitmap = new Bitmap(Swidth, Sheight);

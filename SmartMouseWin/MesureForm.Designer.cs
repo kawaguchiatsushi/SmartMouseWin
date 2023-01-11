@@ -37,6 +37,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button_return = new System.Windows.Forms.Button();
             this.Settings_panel = new System.Windows.Forms.Panel();
+            this.Color_button = new System.Windows.Forms.Button();
             this.Save_button = new System.Windows.Forms.Button();
             this.Control_button = new System.Windows.Forms.Button();
             this.panel_values.SuspendLayout();
@@ -60,7 +61,7 @@
             this.panel_values.AutoSize = true;
             this.panel_values.BackColor = System.Drawing.Color.White;
             this.panel_values.Controls.Add(this.label_value1);
-            this.panel_values.Location = new System.Drawing.Point(12, 374);
+            this.panel_values.Location = new System.Drawing.Point(621, 371);
             this.panel_values.Margin = new System.Windows.Forms.Padding(0);
             this.panel_values.Name = "panel_values";
             this.panel_values.Size = new System.Drawing.Size(6, 31);
@@ -93,7 +94,6 @@
             this.button_close.UseVisualStyleBackColor = true;
             this.button_close.Click += new System.EventHandler(this.Button_close_Click);
             this.button_close.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseDown);
-            this.button_close.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseMove);
             this.button_close.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_close_MouseUp);
             // 
             // button_mode
@@ -103,7 +103,7 @@
             this.button_mode.Name = "button_mode";
             this.button_mode.Size = new System.Drawing.Size(129, 43);
             this.button_mode.TabIndex = 5;
-            this.button_mode.Text = "pixmesure";
+            this.button_mode.Text = "ピクセル距離";
             this.button_mode.UseVisualStyleBackColor = true;
             this.button_mode.Click += new System.EventHandler(this.Button_mode_Click);
             // 
@@ -116,7 +116,6 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseDown);
             this.pictureBox3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseMove);
-            this.pictureBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox3_MouseUp);
             // 
             // button_return
             // 
@@ -131,14 +130,26 @@
             // 
             // Settings_panel
             // 
+            this.Settings_panel.Controls.Add(this.Color_button);
             this.Settings_panel.Controls.Add(this.Save_button);
             this.Settings_panel.Controls.Add(this.button_mode);
             this.Settings_panel.Controls.Add(this.button_return);
             this.Settings_panel.Controls.Add(this.button_close);
             this.Settings_panel.Location = new System.Drawing.Point(12, 122);
             this.Settings_panel.Name = "Settings_panel";
-            this.Settings_panel.Size = new System.Drawing.Size(135, 233);
+            this.Settings_panel.Size = new System.Drawing.Size(135, 287);
             this.Settings_panel.TabIndex = 8;
+            // 
+            // Color_button
+            // 
+            this.Color_button.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Color_button.Location = new System.Drawing.Point(3, 208);
+            this.Color_button.Name = "Color_button";
+            this.Color_button.Size = new System.Drawing.Size(129, 43);
+            this.Color_button.TabIndex = 9;
+            this.Color_button.Text = "色変更";
+            this.Color_button.UseVisualStyleBackColor = true;
+            this.Color_button.Click += new System.EventHandler(this.Color_button_Click);
             // 
             // Save_button
             // 
@@ -201,5 +212,6 @@
         private Panel Settings_panel;
         private Button Control_button;
         private Button Save_button;
+        private Button Color_button;
     }
 }

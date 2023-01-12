@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartMouseWin
+﻿namespace SmartMouseWin
 {
     /// <summary>
     /// mesureの変数を管理する
@@ -51,10 +45,7 @@ namespace SmartMouseWin
             SetCompornent.Set_Panel(this.panel_value, this.label_value, this.End);            
         }
 
-        public static void Value_Save()
-        {
-
-        }
+       
     }
 
     
@@ -88,10 +79,6 @@ namespace SmartMouseWin
             SetCompornent.Set_Lavel(this.label_value,this.PixcelLengthStr);
             SetCompornent.Set_Panel(this.panel_value,this.label_value,this.End);
         }
-
-
-        
-
     }
 
     public class SetCompornent

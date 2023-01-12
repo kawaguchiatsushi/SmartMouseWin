@@ -4,8 +4,25 @@ namespace SmartMouseWin
 {
     public partial class StartForm : Form
     {
-        public Model model = new();
-        private MesureForm MesureForm = new();   
+        public static Model model = new();
+        private MesureForm MesureForm = new();
+
+        //private static bool isMesureFormVisible=false;
+        //public static bool IsMesureFormVisible 
+        //{
+        //    get
+        //    {
+        //        return (isMesureFormVisible);
+        //    }
+        //    set
+        //    { 
+        //        isMesureFormVisible = value;
+        //        if (isMesureFormVisible==false)
+        //        {
+        //            model.ChangeMode();
+        //        }
+        //    }
+        //}
 
         public StartForm()
         {

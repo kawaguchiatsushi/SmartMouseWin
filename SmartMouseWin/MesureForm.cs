@@ -1,43 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
 
 namespace SmartMouseWin
 {
     public partial class MesureForm : Form
     {
-        private Point zeroPoint = new(0,0);
-        private Padding zeroPadding = new(0);
-        
-        DrawLineClass drawLine = new DrawLineClass();
-        double myOpacity = 0.01;
-        Bitmap camvas;
-        Bitmap captureBitmap;
-        Bitmap backCamvas;
-        public static readonly int Swidth =  Screen.PrimaryScreen.Bounds.Width;
+        /// <summary>
+        /// Screen Size
+        /// </summary>
+        public static readonly int Swidth = Screen.PrimaryScreen.Bounds.Width;
         public static readonly int Sheight = Screen.PrimaryScreen.Bounds.Height;
         public static readonly Size S_Size = Screen.PrimaryScreen.Bounds.Size;
 
-        LinkedList<Point> myPoints = new LinkedList<Point>();
-        List<Point> points= new List<Point>();
-        LinkedList<Point> pixcelLengths= new LinkedList<Point>();
+        /// <summary>
+        /// private settings
+        /// </summary>
+        private Point zeroPoint = new(0,0);
+        private Padding zeroPadding = new(0);
+        private readonly string pixModeName = "ピクセル距離";
+        private readonly string cmModeName = "㎝モード";
+
         bool isPixcelLength = true;
         bool isButtonCloseMove = false;
         bool isMesure = true;
-        //bool isMesure = false;
+
+        Bitmap camvas, captureBitmap, backCamvas;       
+
+        LinkedList<Point> myPoints = new();
+        LinkedList<Point> pixcelLengths = new ();
+        
         PixcelLengthModel? MyPixcelLength;
         LinkedList<MesureModel> mesures= new LinkedList<MesureModel>();
+
+        /// <summary>
+        /// for magnification
+        /// </summary>
         Form magform;
         Magnifier magnifier;
-        //MagForm magform;
+
+        /// <summary>
+        /// Class for drawing lines
+        /// </summary>
+        DrawLineClass drawLine = new();
 
         public MesureForm()
         {
@@ -69,14 +72,9 @@ namespace SmartMouseWin
 
         }
 
-        
-
-
-        
 
         private void MesureForm_Load(object sender, EventArgs e)
         {
-            this.Opacity = myOpacity;
             this.TransparencyKey = this.BackColor;
             this.panel_values.BackColor= Color.Transparent;
             captureBitmap = new Bitmap(Swidth, Sheight);
@@ -86,17 +84,17 @@ namespace SmartMouseWin
             pictureBox1.Image= captureBitmap;
             this.Opacity = 1.0;
             this.TransparencyKey = Color.Empty;
-            //panel_values.BackColor = Color.FromArgb(100,Color.Gray);
             button_close.Visible = true;
-            
-            //magform = new MagForm();
+
             Magform();
-            //this.magnifier = new Magnifier(magform);
         }
 
+        /// <summary>
+        /// Form for magnification
+        /// </summary>
         private void Magform()
         {
-            Size magformSize = new Size(100, 100);
+            Size magformSize = new(100, 100);
             this.magform = new Form();
 
             this.magnifier = new Magnifier(this.magform);
@@ -108,36 +106,16 @@ namespace SmartMouseWin
                 this.Control_button.Location.X + this.Control_button.Width + 20,
                 this.Control_button.Location.Y);
 
-            ///
-            PictureBox magPicBox = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(magPicBox)).BeginInit();
-            magPicBox.Parent = this.magform;
-
-            magPicBox.BackColor = Color.Transparent;
-            magPicBox.Location = zeroPoint;
-            magPicBox.Size = magformSize;
-            magPicBox.Margin = zeroPadding;
-            Bitmap magBitmap = new Bitmap(magformSize.Width, magformSize.Height);
-            Color lineColer = Color.SpringGreen;
-            int lineBorder = 1;
-            Pen linePen = new Pen(lineColer, lineBorder);
-            Graphics g = Graphics.FromImage(magBitmap);
-            g.Clear(Color.Transparent);
-            g.DrawLine(linePen, magformSize.Width / 2, 0, magformSize.Width / 2, magformSize.Height);
-            g.DrawLine(linePen, 0, magformSize.Height / 2, magformSize.Width, magformSize.Height / 2);
-            g.Dispose();
-            magPicBox.Image = magBitmap;
-
-            ///
-
             this.magform.TopMost = true;
             this.magform.Visible = true;
+            this.Color_button.BackColor = Color.SpringGreen;
         }
 
 
         private void Button_close_Click(object sender, EventArgs e)
         {
-
+            StartForm.model.ChangeMode();
+            StartForm.model.ShowMode();
             this.Close();
             this.magform.Close();
         }
@@ -145,12 +123,6 @@ namespace SmartMouseWin
         private void Button_close_MouseDown(object sender, MouseEventArgs e)
         {
             isButtonCloseMove=true;
-            
-        }
-
-        private void Button_close_MouseMove(object sender, MouseEventArgs e)
-        {
-            
         }
 
         private void Button_close_MouseUp(object sender, MouseEventArgs e)
@@ -164,19 +136,26 @@ namespace SmartMouseWin
 
         private void Button_mode_Click(object sender, EventArgs e)
         {
-            string pixModeName = "pixcelmode";
-            string cmModeName  = "cmモード";
+            
             if (button_mode.Text == pixModeName)
             {
-                button_mode.Text = cmModeName;
-                this.isPixcelLength= false;
+                if (MyPixcelLength!=null)
+                {
+                    button_mode.Text = cmModeName;
+                    this.isPixcelLength = false;
+                }
             }
             else if (button_mode.Text == cmModeName)
             {
                 button_mode.Text = pixModeName;
-                this.isPixcelLength= true;
+                foreach (var mesure in mesures)
+                {
+                    mesure.panel_value.Dispose();
+                }
                 mesures.Clear();
-                
+                MyPixcelLength = null;
+                Close_Processing();
+                isPixcelLength = !isPixcelLength;
             }
 
         }
@@ -211,6 +190,7 @@ namespace SmartMouseWin
                             MyPixcelLength.Start,
                             MyPixcelLength.End
                             );
+                        button_mode.Text = cmModeName;
 
                     }
                     pictureBox3.Refresh();
@@ -244,7 +224,6 @@ namespace SmartMouseWin
                             mesures,
                             MyPixcelLength
                             );
-                        
                     }
                     pictureBox3.Refresh();
                     return;
@@ -275,7 +254,6 @@ namespace SmartMouseWin
             int myY = e.Location.Y;
 
 
-
             if (this.myPoints.Count == 2)
             {
                 this.myPoints.RemoveLast();
@@ -292,20 +270,11 @@ namespace SmartMouseWin
 
             string s = String.Format(
                 "{0}pixcel",
-
                 pixlength.ToString("0.00")
-
                  );
             this.label_value1.Text = s;
             var changLocation = LocationClass.ChangeValuePanelLocation(e.Location, Swidth, Sheight, panel_values.Size);
             this.panel_values.Location = new Point(myX + changLocation.Item1, myY + changLocation.Item2);
-
-
-        }
-
-        private void PictureBox3_MouseUp(object sender, MouseEventArgs e)
-        {
-
         }
 
         private void Button_return_Click(object sender, EventArgs e)
@@ -345,9 +314,7 @@ namespace SmartMouseWin
                             mesures,
                             MyPixcelLength
                             );
-
                 }
-
             }
 
             if (mesures.Count==0 && MyPixcelLength!=null)
@@ -357,6 +324,10 @@ namespace SmartMouseWin
             }
         }
 
+
+        /// <summary>
+        /// Deleting lines and other information when closing a form.
+        /// </summary>
         private void Close_Processing()
         {
             MyPixcelLength = null;
@@ -378,12 +349,58 @@ namespace SmartMouseWin
 
         private void Save_button_Click(object sender, EventArgs e)
         {
-            //if (mesures.Count > 0)
-            //{
-            //    MesureModel.Value_Save();
-            //}
-            
+            try
+            {
+                if (mesures.Count > 0)
+                {
+                    string clipBoardText = string.Empty;
+                    for (int i = 0; i < mesures.Count; i++)
+                    {
+                        clipBoardText += String.Format
+                            (
+                               "{0}:{1}  ",
+                               (i + 1).ToString(),
+                                mesures.ElementAt(i).CentimeterStr
+                            );
+                    }
 
+                    Clipboard.SetText(clipBoardText);
+                    string message = String.Format
+                            (
+                                "{0}個の長さがクリップボードに保存されました。", mesures.Count.ToString()
+                            );
+                    MessageBox.Show(message, "長さの保存");
+
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return;
+            }
+
+
+        }
+
+        /// <summary>
+        /// Select a color from the color palette to change the line color.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Color_button_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new()
+            {
+                Color = Dimension.LineColor,
+                AllowFullOpen = true,
+                SolidColorOnly = false,
+                CustomColors = new int[] {
+                0x33, 0x66, 0x99, 0xCC, 0x3300, 0x3333,
+                0x3366, 0x3399, 0x33CC, 0x6600, 0x6633,
+                0x6666, 0x6699, 0x66CC, 0x9900, 0x9933}
+            };
+            if (cd.ShowDialog() == DialogResult.OK)            
+                Dimension.LineColor = Color_button.BackColor = cd.Color;
         }
     }
 }

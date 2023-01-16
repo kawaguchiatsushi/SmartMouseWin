@@ -37,8 +37,6 @@ namespace SmartMouseWin
         /// <param name="pixcelLengthModel"></param>
         public static void DrawMesure_D(ref Bitmap camvas, PictureBox pictureBox, PictureBox parentBox, LinkedList<MesureModel> mesures, PixcelLengthModel pixcelLengthModel)
         {
-            
-
             Graphics graphics = Graphics.FromImage(camvas);
             graphics.Clear(Color.Transparent);
 

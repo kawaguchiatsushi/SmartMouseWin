@@ -40,6 +40,7 @@
             this.Color_button = new System.Windows.Forms.Button();
             this.Save_button = new System.Windows.Forms.Button();
             this.Control_button = new System.Windows.Forms.Button();
+            this.help_button = new System.Windows.Forms.Button();
             this.panel_values.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -69,7 +70,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(361, 25);
+            this.pictureBox1.Location = new System.Drawing.Point(486, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(141, 158);
             this.pictureBox1.TabIndex = 2;
@@ -98,12 +99,12 @@
             // 
             // button_mode
             // 
-            this.button_mode.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button_mode.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button_mode.Location = new System.Drawing.Point(3, 61);
             this.button_mode.Name = "button_mode";
             this.button_mode.Size = new System.Drawing.Size(129, 43);
             this.button_mode.TabIndex = 5;
-            this.button_mode.Text = "ピクセル距離";
+            this.button_mode.Text = "ピクセル距離10cm";
             this.button_mode.UseVisualStyleBackColor = true;
             this.button_mode.Click += new System.EventHandler(this.Button_mode_Click);
             // 
@@ -130,6 +131,7 @@
             // 
             // Settings_panel
             // 
+            this.Settings_panel.Controls.Add(this.help_button);
             this.Settings_panel.Controls.Add(this.Color_button);
             this.Settings_panel.Controls.Add(this.Save_button);
             this.Settings_panel.Controls.Add(this.button_mode);
@@ -137,7 +139,7 @@
             this.Settings_panel.Controls.Add(this.button_close);
             this.Settings_panel.Location = new System.Drawing.Point(12, 122);
             this.Settings_panel.Name = "Settings_panel";
-            this.Settings_panel.Size = new System.Drawing.Size(135, 287);
+            this.Settings_panel.Size = new System.Drawing.Size(135, 316);
             this.Settings_panel.TabIndex = 8;
             // 
             // Color_button
@@ -172,6 +174,17 @@
             this.Control_button.TabIndex = 9;
             this.Control_button.UseVisualStyleBackColor = true;
             this.Control_button.Click += new System.EventHandler(this.Control_button_Click);
+            // 
+            // help_button
+            // 
+            this.help_button.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.help_button.Location = new System.Drawing.Point(3, 257);
+            this.help_button.Name = "help_button";
+            this.help_button.Size = new System.Drawing.Size(129, 43);
+            this.help_button.TabIndex = 10;
+            this.help_button.Text = "ヘルプ";
+            this.help_button.UseVisualStyleBackColor = true;
+            this.help_button.Click += new System.EventHandler(this.Help_button_Click);
             // 
             // MesureForm
             // 
@@ -213,5 +226,6 @@
         private Button Control_button;
         private Button Save_button;
         private Button Color_button;
+        private Button help_button;
     }
 }

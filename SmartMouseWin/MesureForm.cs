@@ -162,75 +162,101 @@ namespace SmartMouseWin
 
         private void PictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
-            magform.Visible= true;
+            if(e.Button== MouseButtons.Left)
+            {
+                magform.Visible = true;
 
-            if (Settings_panel.Visible)
-            {
-                Settings_panel.Visible = false;
-            }
-            this.panel_values.BackColor = Color.White;
-            if (isMesure)
-            {
-                
-                if (isPixcelLength)
+                if (Settings_panel.Visible)
                 {
-                    pixcelLengths.AddLast(new Point(e.X, e.Y));
-                    if (pixcelLengths.Count > 1)
+                    Settings_panel.Visible = false;
+                }
+                this.panel_values.BackColor = Color.White;
+                if (isMesure)
+                {
+
+                    if (isPixcelLength)
                     {
-                        MyPixcelLength = new PixcelLengthModel(
-                            pixcelLengths.ElementAt(0),
-                            pixcelLengths.ElementAt(1)
-                            );
-                        isPixcelLength = !isPixcelLength;
-                        pixcelLengths.Clear();
-                        
-                        DrawLineClass.DrawMesure(
-                            ref backCamvas,
-                            pictureBox2,
-                            MyPixcelLength.Start,
-                            MyPixcelLength.End
-                            );
-                        button_mode.Text = cmModeName;
+                        pixcelLengths.AddLast(new Point(e.X, e.Y));
+                        if (pixcelLengths.Count > 1)
+                        {
+                            MyPixcelLength = new PixcelLengthModel(
+                                pixcelLengths.ElementAt(0),
+                                pixcelLengths.ElementAt(1)
+                                );
+                            isPixcelLength = !isPixcelLength;
+                            pixcelLengths.Clear();
+
+                            DrawLineClass.DrawMesure(
+                                ref backCamvas,
+                                pictureBox2,
+                                MyPixcelLength.Start,
+                                MyPixcelLength.End
+                                );
+                            button_mode.Text = cmModeName;
+
+                        }
+                        pictureBox3.Refresh();
+                        return;
 
                     }
-                    pictureBox3.Refresh();
-                    return;
+
+                    if (myPoints.Count == 2)
+                    {
+                        if (MyPixcelLength == null)
+                        {
+                            return;
+                        }
+                        MesureModel mesureModel = new MesureModel(
+                            myPoints.ElementAt(0),
+                            myPoints.ElementAt(1),
+                            MyPixcelLength.PixcelLength,
+                            magnification: 10
+                            );
+                        mesures.AddLast(mesureModel);
+                        myPoints.Clear();
+                        DrawLineClass.ClearMesure(ref camvas, pictureBox3);
+                        panel_values.Visible = false;
+
+                        if (mesures.Count > 0)
+                        {
+                            DrawLineClass.DrawMesure_D(
+                                ref backCamvas,
+                                pictureBox2,
+                                pictureBox3,
+                                mesures,
+                                MyPixcelLength
+                                );
+                        }
+                        pictureBox3.Refresh();
+                        return;
+                    }
+                    myPoints.AddLast(new Point(e.X, e.Y));
 
                 }
-                
-                if (myPoints.Count ==2)
+            }
+            else if(e.Button== MouseButtons.Right)
+            {
+                if(mesures.Count > 0)
                 {
                     if (MyPixcelLength == null)
                     {
                         return;
                     }
-                    MesureModel mesureModel = new MesureModel(
-                        myPoints.ElementAt(0),
-                        myPoints.ElementAt(1),
-                        MyPixcelLength.PixcelLength,
-                        magnification: 10
-                        );
-                    mesures.AddLast(mesureModel);
-                    myPoints.Clear();
-                    DrawLineClass.ClearMesure(ref camvas,pictureBox3);
-                    panel_values.Visible = false;
-                    
-                    if (mesures.Count>0)
-                    {
-                        DrawLineClass.DrawMesure_D(
+                    (mesures.Last().Start,mesures.Last().End) =(mesures.Last().End,mesures.Last().Start);
+                    DrawLineClass.ClearMesure(ref backCamvas, pictureBox2);
+                    DrawLineClass.DrawMesure_D(
                             ref backCamvas,
                             pictureBox2,
                             pictureBox3,
                             mesures,
                             MyPixcelLength
                             );
-                    }
-                    pictureBox3.Refresh();
-                    return;
-                }
-                myPoints.AddLast(new Point(e.X, e.Y));
 
+                }
             }
+            
+            
+            
         }
 
         private void PictureBox3_MouseMove(object sender, MouseEventArgs e)
@@ -345,6 +371,15 @@ namespace SmartMouseWin
         private void Control_button_Click(object sender, EventArgs e)
         {
             Settings_panel.Visible = !Settings_panel.Visible;
+        }
+
+        private void Help_button_Click(object sender, EventArgs e)
+        {
+            string helpstr = "①まずメジャーなどの写真から10㎝の画面上の長さを左クリックを2回で計測\n\r" +
+                "②次に、左クリックで計測したい長さを測る。\n\r" +
+                "③右クリックで、寸法線の描画向きを変更できる。\n\r" +
+                "・設定画面から保存するとテキストクリップボードに計測寸法が記録される。";
+            MessageBox.Show(helpstr,"説明",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void Save_button_Click(object sender, EventArgs e)

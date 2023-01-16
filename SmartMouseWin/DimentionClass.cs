@@ -11,13 +11,13 @@
 
 
     
-        public static void DrawDimension(Graphics g, PointF StartPoint, PointF EndPoint, float Offset)
+        public static void DrawDimensionLine(Graphics g, PointF StartPoint, PointF EndPoint, float Offset)
         {
             float thRad = (float)Math.Atan2(EndPoint.Y - StartPoint.Y, EndPoint.X - StartPoint.X); 
 
             var penLine = new Pen(LineColor, LineWidth);
 
-            float lineLength = Offset + 5f; // 少し飛び出させる
+            float lineLength = Offset + 5f;
 
             var StartPointDst = new PointF(
                 StartPoint.X + lineLength * (float)Math.Cos(thRad - Math.PI / 2.0),

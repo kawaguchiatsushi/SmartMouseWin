@@ -18,8 +18,7 @@ namespace SmartMouseWin
         {
             Graphics graphics = Graphics.FromImage(camvas);
             graphics.Clear(Color.Transparent);
-            Dimension.DrawDimension(graphics, point1, point2,offset);
-            //graphics.DrawLine(linePen, point1.X, point1.Y, point2.X, point2.Y);
+            Dimension.DrawDimensionLine(graphics, point1, point2,offset);
             graphics.Dispose();
             pictureBox.Image = camvas;
         }
@@ -42,41 +41,13 @@ namespace SmartMouseWin
 
             if (pixcelLengthModel != null)
             {
-                if (pixcelLengthModel.Start.Y >pixcelLengthModel.End.Y)
-                {
-                    Dimension.DrawDimension(graphics, pixcelLengthModel.Start, pixcelLengthModel.End, offset);
-                }
-                else if (pixcelLengthModel.Start.Y <= pixcelLengthModel.End.Y)
-                {
-                    Dimension.DrawDimension(graphics, pixcelLengthModel.End,pixcelLengthModel.Start , offset);
-                }
+                Dimension.DrawDimensionLine(graphics, pixcelLengthModel.Start, pixcelLengthModel.End, offset);
             }
             if (mesures != null)
             {
                 foreach (var mesure in mesures)
                 {
-                    if (mesure.Start.Y < MesureForm.Sheight/2)
-                    {
-                        if (mesure.Start.X > mesure.End.X)
-                        {
-                            Dimension.DrawDimension(graphics, mesure.End, mesure.Start, offset);
-                        }
-                        else
-                        {
-                            Dimension.DrawDimension(graphics, mesure.Start, mesure.End, offset);
-                        }                            
-                    }
-                    else
-                    {
-                        if(mesure.Start.X > mesure.End.X)
-                        {
-                            Dimension.DrawDimension(graphics, mesure.Start, mesure.End, offset);
-                        }
-                        else
-                        {
-                            Dimension.DrawDimension(graphics, mesure.End, mesure.Start, offset);
-                        }
-                    }
+                    Dimension.DrawDimensionLine(graphics, mesure.Start, mesure.End, offset);
                     mesure.panel_value.Parent = parentBox;
                 }
             }
@@ -97,10 +68,5 @@ namespace SmartMouseWin
             graphics.Dispose();
             pictureBox.Image = camvas;
         }
-
-        
-
-
-
     }
 }

@@ -20,7 +20,6 @@
             Point end,
             double pixcelLength,
             int magnification = 10
-
             )
         {
             this.Start = start;
@@ -44,11 +43,7 @@
             SetCompornent.Set_Lavel(this.label_value, this.CentimeterStr);
             SetCompornent.Set_Panel(this.panel_value, this.label_value, this.End);            
         }
-
-       
     }
-
-    
 
 
     public class PixcelLengthModel
@@ -99,7 +94,6 @@
             // 
             panel.Size = new System.Drawing.Size(0, 13);
             panel.AutoSize = true;
-            //panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             panel.BackColor = System.Drawing.Color.White;
             panel.Controls.Add(label);
             

@@ -307,7 +307,7 @@ namespace SmartMouseWin
                 }
                 else
                 {
-                    DrawLineClass.DrawMesure(
+                    DrawLineClass.DrawMesure_D(
                             ref backCamvas,
                             pictureBox2,
                             pictureBox3,

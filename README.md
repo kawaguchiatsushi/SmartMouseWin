@@ -16,11 +16,13 @@
   <img src="https://user-images.githubusercontent.com/67472410/211837355-dfafade2-08b4-48be-b7fa-fc09b5864532.png" alt="Example of use" width="500px">  
 </p>
 
-#### 参考：https://dl.ndl.go.jp/ja/pid/2533447/1/　　国立国会図書館デジタルコレクションで公開されている画像資料から、長さを計っています。
+#### 参考：https://dl.ndl.go.jp/ja/pid/2533447/1/
+#### 国立国会図書館デジタルコレクションで公開されている画像資料から、長さを計っています。
 
 # 設定ボタン
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/67472410/211838387-f0f24789-b80a-4822-80bb-a6c5f774fe49.png" alt="Settings Image" width="100px"> 
 </p>
-
+#### 線の色の変更、クリップボードテキストとしての保存ボタンがあります。
+#### マウス周辺を拡大して表示します。

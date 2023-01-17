@@ -24,5 +24,6 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/67472410/211838387-f0f24789-b80a-4822-80bb-a6c5f774fe49.png" alt="Settings Image" width="100px"> 
 </p>
+
 #### 線の色の変更、クリップボードテキストとしての保存ボタンがあります。
 #### マウス周辺を拡大して表示します。
